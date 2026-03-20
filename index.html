@@ -1377,21 +1377,11 @@ Réponds UNIQUEMENT avec un tableau JSON valide, sans texte avant ni après, san
           <span class="badge ${potColor[p.potentiel]||'badge-neutral'}" style="flex-shrink:0;margin-left:8px">${p.potentiel}</span>
         </div>
         <div style="font-size:10px;color:var(--blue);margin-bottom:8px;font-weight:600">${p.type}</div>
-        <div style="font-size:11px;color:var(--text3);margin-bottom:6px">📍 ${p.adresse}</div>
-
-        <div style="display:flex;gap:6px;margin-bottom:8px">
-          ${p.telephone?`
-          <a href="sms:${p.telephone.replace(/\s/g,'')}" style="flex:1;text-decoration:none">
-            <button class="btn btn-primary" style="width:100%;font-size:10px;padding:5px 4px;background:var(--ok);border-color:var(--ok)">💬 SMS · ${p.telephone}</button>
-          </a>`:''}
-          ${p.email?`
-          <a href="mailto:${p.email}?subject=YS Clim — Entretien climatisation&body=Bonjour ${p.prenom},%0A%0AJe me permets de vous contacter concernant l'entretien et la maintenance de votre système de climatisation.%0A%0AYohann Scaringi — YS Clim, L'Isle-sur-la-Sorgue (84)%0ATél : votre numéro" style="flex:1;text-decoration:none">
-            <button class="btn btn-ghost" style="width:100%;font-size:10px;padding:5px 4px;color:var(--blue)">✉ Mail</button>
-          </a>`:''}
-        </div>
-
+        <div style="font-size:11px;color:var(--text3);margin-bottom:4px">📍 ${p.adresse}</div>
+        ${p.telephone?`<div style="font-size:11px;color:var(--text2);margin-bottom:2px">📞 ${p.telephone}</div>`:''}
+        ${p.email?`<div style="font-size:11px;color:var(--blue);margin-bottom:8px">✉ ${p.email}</div>`:''}
         <div style="font-size:10px;color:var(--text3);font-style:italic;margin-bottom:10px;padding:6px 8px;background:var(--bg3);border-radius:5px;line-height:1.5">${p.note}</div>
-        <button class="btn btn-ghost" style="width:100%;font-size:10px;padding:5px;border-color:var(--border2)" id="pro-add-btn-${i}" onclick="ajouterProspectCRM(${i})">+ Ajouter au CRM</button>
+        <button class="btn btn-primary" style="width:100%;font-size:10px;padding:5px" id="pro-add-btn-${i}" onclick="ajouterProspectCRM(${i})">+ Ajouter au CRM</button>
       </div>`).join('');
 
     // Lancer analyse IA automatique
