@@ -1,8 +1,16 @@
-<html lang="fr"><head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <title>YS Clim</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="YS Clim"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#070809"/>
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070809'/><circle cx='50' cy='50' r='8' fill='%233b82f6' filter='drop-shadow(0 0 8px %233b82f6)'/><text x='50' y='85' text-anchor='middle' font-family='Inter,sans-serif' font-size='18' font-weight='700' fill='white'>YS</text></svg>"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
   --bg:#070809;
@@ -168,7 +176,40 @@ tr:hover td{background:rgba(59,130,246,.03)}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:99px}
 .divider{height:1px;background:var(--border);margin:16px 0}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ══ MOBILE ══ */
+@media(max-width:768px){
+  .sidebar{display:none;width:100%;height:auto;position:fixed;bottom:0;top:auto;flex-direction:row;border-right:none;border-top:1px solid var(--border);z-index:200;overflow-x:auto;overflow-y:hidden;padding:0}
+  .sidebar.mobile-open{display:flex}
+  .logo,.nav-section,.sidebar-bottom{display:none}
+  .nav-item{flex-direction:column;gap:3px;padding:8px 12px;margin:0;border-radius:0;font-size:9px;min-width:60px;justify-content:center;border:none!important}
+  .ni{font-size:16px;width:auto}
+  .main{margin-left:0;padding-bottom:70px}
+  .topbar{padding:12px 16px;position:sticky;top:0}
+  .tb-title{font-size:14px}
+  .content{padding:14px 16px}
+  .metrics{grid-template-columns:repeat(2,1fr)!important}
+  .split,.split-3{grid-template-columns:1fr!important}
+  .inp-grid{grid-template-columns:1fr!important}
+  .modal{width:95vw!important;max-width:95vw!important;padding:18px}
+  .modal-lg{width:95vw!important}
+  table{font-size:11px}
+  th,td{padding:8px 10px}
+  .card-grid{grid-template-columns:1fr!important}
+  #page-devis > div{grid-template-columns:1fr!important}
+  .km-calc{padding:14px}
+  /* Barre de navigation mobile en bas */
+  .mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);z-index:200;overflow-x:auto}
+  .mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 10px;cursor:pointer;font-size:9px;font-weight:500;color:var(--text3);white-space:nowrap;min-width:55px;transition:color .15s}
+  .mobile-nav-item.active{color:var(--blue)}
+  .mobile-nav-item .mni{font-size:18px}
+  .pro-cards-mobile{grid-template-columns:1fr!important}
+}
+@media(min-width:769px){
+  .mobile-nav{display:none}
+}
 </style>
+<script>(function(){var d={"clients":[{"prenom":"MEHDI","nom":"HADDADI","tel":"0622027627","email":"","adresse":"","ville":"LAGNE","type":"pro","equip":"ATLANTIC","notes":""},{"prenom":"NATHALIE","nom":"","tel":"0617910148","email":"","adresse":"","ville":"L ISLE SUR LA SORGUE","type":"particulier","equip":"GREE","notes":""},{"prenom":"JEAN PHILLIPE","nom":"PROFETI","tel":"0629247631","email":"","adresse":"","ville":"VILLENEUVE LES AVIGNON","type":"particulier","equip":"GREE","notes":""},{"prenom":"ANAIS","nom":"BERARDET","tel":"0618136004","email":"","adresse":"","ville":"L ISLE SUR LA SORGUE","type":"particulier","equip":"GREE","notes":""},{"prenom":"OTHMAN","nom":"LAZRAK","tel":"0776749860","email":"","adresse":"","ville":"VELORGUE","type":"particulier","equip":"DAIKIN","notes":""},{"prenom":"BOUSSO","nom":"","tel":"","email":"","adresse":"","ville":"L ISLE SUR LA SORGUE","type":"particulier","equip":"PANASONIC","notes":""},{"prenom":"DYLAN","nom":"DEPAUL","tel":"0658537280","email":"","adresse":"","ville":"VEDENE","type":"particulier","equip":"FUDJITSU","notes":""},{"prenom":"CECILE","nom":"BOUCHARD","tel":"0626252923","email":"","adresse":"","ville":"MAUBEC","type":"particulier","equip":"PANASONIC","notes":""}],"rdvs":[],"interventions":[{"date":"2026-02-02","client":"0","type":"autre","km":"","desc":"POSE, ENTRETIEN","prix":"2827.60","pm":"cheque","statut":"realise","fromFacture":"YSC-0001"},{"date":"2026-02-04","client":"1","type":"autre","km":"","desc":"ENTRETIENS","prix":"80.00","pm":"especes","statut":"realise","fromFacture":"YSC-0002"},{"date":"2026-03-17","client":"2","type":"autre","km":"","desc":"ENTRETIENS","prix":"80.00","pm":"especes","statut":"realise","fromFacture":"YSC-0003"},{"date":"2026-03-12","client":"3","type":"autre","km":"","desc":"ENTRETIENS","prix":"80.00","pm":"especes","statut":"realise","fromFacture":"YSC-0004"},{"date":"2026-03-23","client":"4","type":"autre","km":"","desc":"POSE CLIMATISATION","prix":"650.00","pm":"especes","statut":"realise","fromFacture":"YSC-0005"},{"date":"2026-03-23","client":"5","type":"autre","km":"","desc":"ENTRETIENS, RECHARGE DE GAZ","prix":"200.00","pm":"especes","statut":"realise","fromFacture":"YSC-0006"},{"date":"2026-03-20","client":"6","type":"autre","km":"","desc":"ENTRETIENS","prix":"240.00","pm":"virement","statut":"realise","fromFacture":"YSC-0007"},{"date":"2026-03-23","client":"7","type":"autre","km":"","desc":"ENTRETIENS","prix":"100.00","pm":"cheque","statut":"realise","fromFacture":"YSC-0008"}],"factures":[{"num":"YSC-0001","client":"0","date":"2026-02-02","ech":"","ttc":"2827.6","materiel":"1627.6","mo":"1200","pm":"cheque","desc":"POSE, ENTRETIEN","statut":"payee"},{"num":"YSC-0002","client":"1","date":"2026-02-04","ech":"","ttc":"80","materiel":"0","mo":"80","pm":"especes","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0003","client":"2","date":"2026-03-17","ech":"","ttc":"80","materiel":"0","mo":"80","pm":"especes","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0004","client":"3","date":"2026-03-12","ech":"","ttc":"80","materiel":"0","mo":"80","pm":"especes","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0005","client":"4","date":"2026-03-23","ech":"","ttc":"650","materiel":"550","mo":"100","pm":"especes","desc":"POSE CLIMATISATION","statut":"payee"},{"num":"YSC-0006","client":"5","date":"2026-03-23","ech":"","ttc":"200","materiel":"0","mo":"200","pm":"especes","desc":"ENTRETIENS, RECHARGE DE GAZ","statut":"payee"},{"num":"YSC-0007","client":"6","date":"2026-03-20","ech":"","ttc":"240","materiel":"0","mo":"240","pm":"virement","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0008","client":"7","date":"2026-03-23","ech":"","ttc":"100","materiel":"0","mo":"100","pm":"cheque","desc":"ENTRETIENS","statut":"payee"}],"docs":[],"deplacements":[]};localStorage.setItem('ys_clients',JSON.stringify(d.clients||[]));localStorage.setItem('ys_rdvs',JSON.stringify(d.rdvs||[]));localStorage.setItem('ys_interventions',JSON.stringify(d.interventions||[]));localStorage.setItem('ys_factures',JSON.stringify(d.factures||[]));localStorage.setItem('ys_docs',JSON.stringify(d.docs||[]));localStorage.setItem('ys_deplacements',JSON.stringify(d.deplacements||[]));})();</script>
 </head>
 <body>
 
@@ -179,12 +220,12 @@ tr:hover td{background:rgba(59,130,246,.03)}
     <div class="logo-sub">L'Isle-sur-la-Sorgue · Vaucluse (84)</div>
   </div>
   <div class="nav-section">Principal</div>
-  <div class="nav-item" onclick="goPage('dashboard',this)"><span class="ni">◈</span>Dashboard</div>
+  <div class="nav-item active" onclick="goPage('dashboard',this)"><span class="ni">◈</span>Dashboard</div>
   <div class="nav-item" onclick="goPage('crm',this)"><span class="ni">◎</span>CRM Clients</div>
   <div class="nav-item" onclick="goPage('calendrier',this)"><span class="ni">◷</span>Calendrier</div>
   <div class="nav-section">Finance</div>
-  <div class="nav-item" onclick="goPage('devis',this)"><span class="ni">◻</span>Devis &amp; Contrats</div>
-  <div class="nav-item active" onclick="goPage('facturation',this)"><span class="ni">◈</span>Facturation</div>
+  <div class="nav-item" onclick="goPage('devis',this)"><span class="ni">◻</span>Devis & Contrats</div>
+  <div class="nav-item" onclick="goPage('facturation',this)"><span class="ni">◈</span>Facturation</div>
   <div class="nav-section">Analyse</div>
   <div class="nav-item" onclick="goPage('historique',this)"><span class="ni">→</span>Historique</div>
   <div class="nav-item" onclick="goPage('stats',this)"><span class="ni">↗</span>Statistiques</div>
@@ -193,9 +234,9 @@ tr:hover td{background:rgba(59,130,246,.03)}
   <div class="nav-item" onclick="goPage('prospection',this)"><span class="ni">🎯</span>Prospection IA</div>
   <div class="sidebar-bottom">
     <div class="sidebar-user">Yohann Scaringi</div>
-    <div class="sidebar-date" id="sb-date">lun. 23 mars 2026</div>
+    <div class="sidebar-date" id="sb-date"></div>
     <button onclick="ouvrirParamsCle()" style="margin-top:10px;width:100%;padding:7px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text3);font-size:11px;font-family:'Inter',sans-serif;cursor:pointer;font-weight:500">🔑 Clé API</button>
-    <button onclick="window.alma&amp;&amp;window.alma.loadPage?window.alma.loadPage('index.html'):null" style="margin-top:10px;width:100%;padding:7px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text3);font-size:11px;font-family:'Inter',sans-serif;cursor:pointer;font-weight:500">← Admin</button>
+    <button onclick="window.alma&&window.alma.loadPage?window.alma.loadPage('index.html'):null" style="margin-top:10px;width:100%;padding:7px;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;color:var(--text3);font-size:11px;font-family:'Inter',sans-serif;cursor:pointer;font-weight:500">← Admin</button>
   </div>
 </nav>
 
@@ -203,8 +244,8 @@ tr:hover td{background:rgba(59,130,246,.03)}
 <div class="main">
   <div class="topbar">
     <div>
-      <div class="tb-title" id="tb-title">Facturation</div>
-      <div class="tb-sub" id="tb-sub">Suivi des paiements</div>
+      <div class="tb-title" id="tb-title">Dashboard</div>
+      <div class="tb-sub" id="tb-sub">Vue d'ensemble · YS Clim</div>
     </div>
     <div style="display:flex;gap:8px" id="tb-right">
   <button class="btn btn-primary" onclick="saveHTML()" title="Télécharge le fichier HTML avec toutes vos données intégrées">⬇ Sauvegarder</button>
@@ -214,7 +255,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
   <div class="content">
 
     <!-- DASHBOARD -->
-    <div class="page" id="page-dashboard">
+    <div class="page active" id="page-dashboard">
       <div class="metrics" style="grid-template-columns:repeat(5,1fr)">
         <div class="metric metric-blue"><div class="metric-label">CA total</div><div class="metric-value" id="kpi-ca">0 €</div><div class="metric-sub">interventions + factures</div></div>
         <div class="metric"><div class="metric-label">Réel gagné (hors matériel)</div><div class="metric-value" id="kpi-mo" style="color:var(--ok)">0 €</div></div>
@@ -225,174 +266,30 @@ tr:hover td{background:rgba(59,130,246,.03)}
       <div class="split">
         <div class="panel">
           <div class="panel-title">Prochains rendez-vous</div>
-          <div id="dash-rdv"><div style="color:var(--text3);font-size:12px;text-align:center;padding:22px">Aucun RDV à venir</div></div>
+          <div id="dash-rdv"></div>
         </div>
         <div class="panel">
           <div class="panel-title">Factures en attente</div>
-          <div id="dash-fact"><div style="color:var(--text3);font-size:12px;text-align:center;padding:22px">Aucune facture en attente</div></div>
+          <div id="dash-fact"></div>
         </div>
       </div>
       <div class="panel">
         <div class="panel-title">Activité — 7 derniers jours</div>
-        <div class="chart-bars" id="dash-chart" style="height:70px;margin-top:6px"><div class="chart-bw"><div class="chart-b" style="height:70px"><div class="chart-bf" style="height:0%"></div></div></div><div class="chart-bw"><div class="chart-b" style="height:70px"><div class="chart-bf" style="height:0%"></div></div></div><div class="chart-bw"><div class="chart-b" style="height:70px"><div class="chart-bf" style="height:0%"></div></div></div><div class="chart-bw"><div class="chart-b" style="height:70px"><div class="chart-bf" style="height:0%"></div></div></div><div class="chart-bw"><div class="chart-b" style="height:70px"><div class="chart-bf" style="height:0%"></div></div></div><div class="chart-bw"><div class="chart-b" style="height:70px"><div class="chart-bf" style="height:0%"></div></div></div><div class="chart-bw"><div class="chart-b" style="height:70px"><div class="chart-bf" style="height:0%"></div></div></div></div>
-        <div class="chart-bars" id="dash-chart-lbl" style="margin-top:5px"><div class="chart-bw"><div class="chart-lbl">mar.</div></div><div class="chart-bw"><div class="chart-lbl">mer.</div></div><div class="chart-bw"><div class="chart-lbl">jeu.</div></div><div class="chart-bw"><div class="chart-lbl">ven.</div></div><div class="chart-bw"><div class="chart-lbl">sam.</div></div><div class="chart-bw"><div class="chart-lbl">dim.</div></div><div class="chart-bw"><div class="chart-lbl">lun.</div></div></div>
+        <div class="chart-bars" id="dash-chart" style="height:70px;margin-top:6px"></div>
+        <div class="chart-bars" id="dash-chart-lbl" style="margin-top:5px"></div>
       </div>
     </div>
 
     <!-- CRM -->
     <div class="page" id="page-crm">
       <div class="filters">
-        <input class="search" type="text" id="crm-search" placeholder="Nom, téléphone, ville..." oninput="renderCRM()">
+        <input class="search" type="text" id="crm-search" placeholder="Nom, téléphone, ville..." oninput="renderCRM()"/>
         <button class="filter-btn active" id="crm-f-all" onclick="setCRMF('all')">Tous</button>
         <button class="filter-btn" id="crm-f-pro" onclick="setCRMF('pro')">Professionnel</button>
         <button class="filter-btn" id="crm-f-part" onclick="setCRMF('particulier')">Particulier</button>
         <button class="btn btn-primary" onclick="openClientModal()">+ Client</button>
       </div>
-      <div class="card-grid" id="crm-grid"><div class="client-card">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-        <div style="width:34px;height:34px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--blue)">M</div>
-        <div style="display:flex;gap:5px">
-          <span class="badge badge-blue">Professionnel</span>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px" onclick="editClient(0)">✎</button>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delClient(0)">✕</button>
-        </div>
-      </div>
-      <div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:-.02em">MEHDI HADDADI</div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px">0622027627</div>
-      <div style="font-size:11px;color:var(--text3)">LAGNE</div>
-      <div style="font-size:10px;color:var(--blue);margin-top:5px;background:var(--blue-dim);padding:3px 7px;border-radius:4px;display:inline-block">ATLANTIC</div>
-      
-      <div style="display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">Interventions</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0</div></div>
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">CA total</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0 €</div></div>
-      </div>
-    </div><div class="client-card">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-        <div style="width:34px;height:34px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--blue)">N</div>
-        <div style="display:flex;gap:5px">
-          <span class="badge badge-neutral">Particulier</span>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px" onclick="editClient(1)">✎</button>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delClient(1)">✕</button>
-        </div>
-      </div>
-      <div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:-.02em">NATHALIE </div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px">0617910148</div>
-      <div style="font-size:11px;color:var(--text3)">L ISLE SUR LA SORGUE</div>
-      <div style="font-size:10px;color:var(--blue);margin-top:5px;background:var(--blue-dim);padding:3px 7px;border-radius:4px;display:inline-block">GREE</div>
-      
-      <div style="display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">Interventions</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0</div></div>
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">CA total</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0 €</div></div>
-      </div>
-    </div><div class="client-card">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-        <div style="width:34px;height:34px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--blue)">J</div>
-        <div style="display:flex;gap:5px">
-          <span class="badge badge-neutral">Particulier</span>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px" onclick="editClient(2)">✎</button>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delClient(2)">✕</button>
-        </div>
-      </div>
-      <div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:-.02em">JEAN PHILLIPE PROFETI</div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px">0629247631</div>
-      <div style="font-size:11px;color:var(--text3)">VILLENEUVE LES AVIGNON</div>
-      <div style="font-size:10px;color:var(--blue);margin-top:5px;background:var(--blue-dim);padding:3px 7px;border-radius:4px;display:inline-block">GREE</div>
-      
-      <div style="display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">Interventions</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0</div></div>
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">CA total</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0 €</div></div>
-      </div>
-    </div><div class="client-card">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-        <div style="width:34px;height:34px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--blue)">A</div>
-        <div style="display:flex;gap:5px">
-          <span class="badge badge-neutral">Particulier</span>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px" onclick="editClient(3)">✎</button>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delClient(3)">✕</button>
-        </div>
-      </div>
-      <div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:-.02em">ANAIS BERARDET</div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px">0618136004</div>
-      <div style="font-size:11px;color:var(--text3)">L ISLE SUR LA SORGUE</div>
-      <div style="font-size:10px;color:var(--blue);margin-top:5px;background:var(--blue-dim);padding:3px 7px;border-radius:4px;display:inline-block">GREE</div>
-      
-      <div style="display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">Interventions</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0</div></div>
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">CA total</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0 €</div></div>
-      </div>
-    </div><div class="client-card">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-        <div style="width:34px;height:34px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--blue)">O</div>
-        <div style="display:flex;gap:5px">
-          <span class="badge badge-neutral">Particulier</span>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px" onclick="editClient(4)">✎</button>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delClient(4)">✕</button>
-        </div>
-      </div>
-      <div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:-.02em">OTHMAN LAZRAK</div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px">0776749860</div>
-      <div style="font-size:11px;color:var(--text3)">VELORGUE</div>
-      <div style="font-size:10px;color:var(--blue);margin-top:5px;background:var(--blue-dim);padding:3px 7px;border-radius:4px;display:inline-block">DAIKIN</div>
-      
-      <div style="display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">Interventions</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0</div></div>
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">CA total</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0 €</div></div>
-      </div>
-    </div><div class="client-card">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-        <div style="width:34px;height:34px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--blue)">B</div>
-        <div style="display:flex;gap:5px">
-          <span class="badge badge-neutral">Particulier</span>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px" onclick="editClient(5)">✎</button>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delClient(5)">✕</button>
-        </div>
-      </div>
-      <div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:-.02em">BOUSSO </div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px">—</div>
-      <div style="font-size:11px;color:var(--text3)">L ISLE SUR LA SORGUE</div>
-      <div style="font-size:10px;color:var(--blue);margin-top:5px;background:var(--blue-dim);padding:3px 7px;border-radius:4px;display:inline-block">PANASONIC</div>
-      
-      <div style="display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">Interventions</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0</div></div>
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">CA total</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0 €</div></div>
-      </div>
-    </div><div class="client-card">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-        <div style="width:34px;height:34px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--blue)">D</div>
-        <div style="display:flex;gap:5px">
-          <span class="badge badge-neutral">Particulier</span>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px" onclick="editClient(6)">✎</button>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delClient(6)">✕</button>
-        </div>
-      </div>
-      <div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:-.02em">DYLAN DEPAUL</div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px">0658537280</div>
-      <div style="font-size:11px;color:var(--text3)">VEDENE</div>
-      <div style="font-size:10px;color:var(--blue);margin-top:5px;background:var(--blue-dim);padding:3px 7px;border-radius:4px;display:inline-block">FUDJITSU</div>
-      
-      <div style="display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">Interventions</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0</div></div>
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">CA total</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0 €</div></div>
-      </div>
-    </div><div class="client-card">
-      <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:12px">
-        <div style="width:34px;height:34px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--blue)">C</div>
-        <div style="display:flex;gap:5px">
-          <span class="badge badge-neutral">Particulier</span>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px" onclick="editClient(7)">✎</button>
-          <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delClient(7)">✕</button>
-        </div>
-      </div>
-      <div style="font-size:13px;font-weight:700;color:var(--white);letter-spacing:-.02em">CECILE BOUCHARD</div>
-      <div style="font-size:11px;color:var(--text3);margin-top:2px">0626252923</div>
-      <div style="font-size:11px;color:var(--text3)">MAUBEC</div>
-      <div style="font-size:10px;color:var(--blue);margin-top:5px;background:var(--blue-dim);padding:3px 7px;border-radius:4px;display:inline-block">PANASONIC</div>
-      
-      <div style="display:flex;gap:16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">Interventions</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0</div></div>
-        <div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em">CA total</div><div style="font-size:15px;font-weight:700;color:var(--white);margin-top:2px">0 €</div></div>
-      </div>
-    </div></div>
+      <div class="card-grid" id="crm-grid"></div>
     </div>
 
     <!-- CALENDRIER -->
@@ -400,181 +297,13 @@ tr:hover td{background:rgba(59,130,246,.03)}
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
         <div class="cal-nav" style="margin:0">
           <button class="btn btn-ghost" onclick="calNav(-1)">‹</button>
-          <div class="cal-nav-title" id="cal-title" style="margin:0 16px">Mars 2026</div>
+          <div class="cal-nav-title" id="cal-title" style="margin:0 16px"></div>
           <button class="btn btn-ghost" onclick="calNav(1)">›</button>
         </div>
         <button class="btn btn-primary" onclick="openRDVModal()">+ Rendez-vous</button>
       </div>
-      <div class="cal-grid" id="cal-heads"><div class="cal-head">Lun</div><div class="cal-head">Mar</div><div class="cal-head">Mer</div><div class="cal-head">Jeu</div><div class="cal-head">Ven</div><div class="cal-head">Sam</div><div class="cal-head">Dim</div></div>
-      <div class="cal-grid" style="margin-top:3px" id="cal-body"><div class="cal-day other-month" onclick="showDay('2026-02-22')">
-      <div class="cal-day-num">23</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-02-23')">
-      <div class="cal-day-num">24</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-02-24')">
-      <div class="cal-day-num">25</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-02-25')">
-      <div class="cal-day-num">26</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-02-26')">
-      <div class="cal-day-num">27</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-02-27')">
-      <div class="cal-day-num">28</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-02-28')">
-      <div class="cal-day-num">1</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-01')">
-      <div class="cal-day-num">2</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-02')">
-      <div class="cal-day-num">3</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-03')">
-      <div class="cal-day-num">4</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-04')">
-      <div class="cal-day-num">5</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-05')">
-      <div class="cal-day-num">6</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-06')">
-      <div class="cal-day-num">7</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-07')">
-      <div class="cal-day-num">8</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-08')">
-      <div class="cal-day-num">9</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-09')">
-      <div class="cal-day-num">10</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-10')">
-      <div class="cal-day-num">11</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-11')">
-      <div class="cal-day-num">12</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-12')">
-      <div class="cal-day-num">13</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-13')">
-      <div class="cal-day-num">14</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-14')">
-      <div class="cal-day-num">15</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-15')">
-      <div class="cal-day-num">16</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-16')">
-      <div class="cal-day-num">17</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-17')">
-      <div class="cal-day-num">18</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-18')">
-      <div class="cal-day-num">19</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-19')">
-      <div class="cal-day-num">20</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-20')">
-      <div class="cal-day-num">21</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-21')">
-      <div class="cal-day-num">22</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-22')">
-      <div class="cal-day-num">23</div>
-      
-      
-    </div><div class="cal-day today" onclick="showDay('2026-03-23')">
-      <div class="cal-day-num">24</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-24')">
-      <div class="cal-day-num">25</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-25')">
-      <div class="cal-day-num">26</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-26')">
-      <div class="cal-day-num">27</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-27')">
-      <div class="cal-day-num">28</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-28')">
-      <div class="cal-day-num">29</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-29')">
-      <div class="cal-day-num">30</div>
-      
-      
-    </div><div class="cal-day" onclick="showDay('2026-03-30')">
-      <div class="cal-day-num">31</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-03-31')">
-      <div class="cal-day-num">1</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-04-01')">
-      <div class="cal-day-num">2</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-04-02')">
-      <div class="cal-day-num">3</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-04-03')">
-      <div class="cal-day-num">4</div>
-      
-      
-    </div><div class="cal-day other-month" onclick="showDay('2026-04-04')">
-      <div class="cal-day-num">5</div>
-      
-      
-    </div></div>
+      <div class="cal-grid" id="cal-heads"></div>
+      <div class="cal-grid" style="margin-top:3px" id="cal-body"></div>
     </div>
 
     <!-- DEVIS & CONTRATS -->
@@ -585,7 +314,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
             <button class="btn btn-ghost" style="flex:1;font-size:11px" onclick="newDoc('devis')">Devis</button>
             <button class="btn btn-primary" style="flex:1;font-size:11px" onclick="newDoc('contrat')">Contrat</button>
           </div>
-          <div id="doc-list"><div style="text-align:center;padding:28px;color:var(--text3);font-size:12px">Aucun document</div></div>
+          <div id="doc-list"></div>
         </div>
         <div>
           <div id="editor-zone" style="display:none;background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;height:100%;flex-direction:column">
@@ -617,15 +346,15 @@ tr:hover td{background:rgba(59,130,246,.03)}
     </div>
 
     <!-- FACTURATION -->
-    <div class="page active" id="page-facturation">
+    <div class="page" id="page-facturation">
       <div class="metrics" style="grid-template-columns:repeat(4,1fr)">
-        <div class="metric"><div class="metric-label">Total facturé</div><div class="metric-value" id="ft-total">4258 €</div></div>
-        <div class="metric metric-blue"><div class="metric-label">Total encaissé</div><div class="metric-value" id="ft-enc">4258 €</div></div>
-        <div class="metric"><div class="metric-label">Réel gagné (hors matériel)</div><div class="metric-value" id="ft-mo" style="color:var(--ok)">2080 €</div></div>
+        <div class="metric"><div class="metric-label">Total facturé</div><div class="metric-value" id="ft-total">0 €</div></div>
+        <div class="metric metric-blue"><div class="metric-label">Total encaissé</div><div class="metric-value" id="ft-enc">0 €</div></div>
+        <div class="metric"><div class="metric-label">Réel gagné (hors matériel)</div><div class="metric-value" id="ft-mo" style="color:var(--ok)">0 €</div></div>
         <div class="metric"><div class="metric-label">En attente</div><div class="metric-value" id="ft-att" style="color:var(--warn)">0 €</div></div>
       </div>
       <div class="filters">
-        <input class="search" type="text" id="fact-search" placeholder="Client, numéro..." oninput="renderFact()">
+        <input class="search" type="text" id="fact-search" placeholder="Client, numéro..." oninput="renderFact()"/>
         <button class="filter-btn active" id="fact-f-all" onclick="setFactF('all')">Toutes</button>
         <button class="filter-btn" id="fact-f-att" onclick="setFactF('attente')">En attente</button>
         <button class="filter-btn" id="fact-f-pay" onclick="setFactF('payee')">Payées</button>
@@ -633,87 +362,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
       </div>
       <div class="table-wrap">
         <table><thead><tr><th>N° Facture</th><th>Client</th><th>Date</th><th>Échéance</th><th>Montant</th><th>Statut</th><th></th></tr></thead>
-        <tbody id="fact-tbody"><tr>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)">YSC-0001</td>
-      <td style="font-weight:600;color:var(--white)">MEHDI HADDADI</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">2026-02-02</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">—</td>
-      <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--white)">2828 € TTC</td>
-      <td><span class="badge badge-ok">Payée</span></td>
-      <td style="display:flex;gap:5px">
-        
-        <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delFact(0)">✕</button>
-      </td></tr><tr>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)">YSC-0002</td>
-      <td style="font-weight:600;color:var(--white)">NATHALIE </td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">2026-02-04</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">—</td>
-      <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--white)">80 € TTC</td>
-      <td><span class="badge badge-ok">Payée</span></td>
-      <td style="display:flex;gap:5px">
-        
-        <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delFact(1)">✕</button>
-      </td></tr><tr>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)">YSC-0003</td>
-      <td style="font-weight:600;color:var(--white)">JEAN PHILLIPE PROFETI</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">2026-03-17</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">—</td>
-      <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--white)">80 € TTC</td>
-      <td><span class="badge badge-ok">Payée</span></td>
-      <td style="display:flex;gap:5px">
-        
-        <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delFact(2)">✕</button>
-      </td></tr><tr>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)">YSC-0004</td>
-      <td style="font-weight:600;color:var(--white)">ANAIS BERARDET</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">2026-03-12</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">—</td>
-      <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--white)">80 € TTC</td>
-      <td><span class="badge badge-ok">Payée</span></td>
-      <td style="display:flex;gap:5px">
-        
-        <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delFact(3)">✕</button>
-      </td></tr><tr>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)">YSC-0005</td>
-      <td style="font-weight:600;color:var(--white)">OTHMAN LAZRAK</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">2026-03-23</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">—</td>
-      <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--white)">650 € TTC</td>
-      <td><span class="badge badge-ok">Payée</span></td>
-      <td style="display:flex;gap:5px">
-        
-        <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delFact(4)">✕</button>
-      </td></tr><tr>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)">YSC-0006</td>
-      <td style="font-weight:600;color:var(--white)">BOUSSO </td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">2026-03-23</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">—</td>
-      <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--white)">200 € TTC</td>
-      <td><span class="badge badge-ok">Payée</span></td>
-      <td style="display:flex;gap:5px">
-        
-        <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delFact(5)">✕</button>
-      </td></tr><tr>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)">YSC-0007</td>
-      <td style="font-weight:600;color:var(--white)">DYLAN DEPAUL</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">2026-03-20</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">—</td>
-      <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--white)">240 € TTC</td>
-      <td><span class="badge badge-ok">Payée</span></td>
-      <td style="display:flex;gap:5px">
-        
-        <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delFact(6)">✕</button>
-      </td></tr><tr>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)">YSC-0008</td>
-      <td style="font-weight:600;color:var(--white)">CECILE BOUCHARD</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">2026-03-23</td>
-      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">—</td>
-      <td style="font-family:'DM Mono',monospace;font-weight:700;color:var(--white)">100 € TTC</td>
-      <td><span class="badge badge-ok">Payée</span></td>
-      <td style="display:flex;gap:5px">
-        
-        <button class="btn btn-ghost" style="padding:3px 7px;font-size:10px;color:var(--danger)" onclick="delFact(7)">✕</button>
-      </td></tr></tbody></table>
+        <tbody id="fact-tbody"></tbody></table>
       </div>
     </div>
 
@@ -727,7 +376,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
         <div class="metric"><div class="metric-label">Panier moyen</div><div class="metric-value" id="hi-moy">0 €</div></div>
       </div>
       <div class="filters">
-        <input class="search" type="text" id="hi-search" placeholder="Client, type, ville..." oninput="renderHist()">
+        <input class="search" type="text" id="hi-search" placeholder="Client, type, ville..." oninput="renderHist()"/>
         <button class="filter-btn active" id="hi-f-all" onclick="setHistF('all')">Tous</button>
         <button class="filter-btn" id="hi-f-install" onclick="setHistF('installation')">Installation</button>
         <button class="filter-btn" id="hi-f-maint" onclick="setHistF('maintenance')">Maintenance</button>
@@ -736,7 +385,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
       </div>
       <div class="table-wrap">
         <table><thead><tr><th>Date</th><th>Client</th><th>Type</th><th>Description</th><th>Km</th><th>Prix</th><th>Statut</th><th></th></tr></thead>
-        <tbody id="hi-tbody"><tr><td colspan="8" style="text-align:center;padding:28px;color:var(--text3)">Aucune intervention</td></tr></tbody></table>
+        <tbody id="hi-tbody"></tbody></table>
       </div>
     </div>
 
@@ -790,7 +439,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
                 <select class="inp" id="km-cv" onchange="calcKm()">
                   <option value="3">3 CV et moins</option>
                   <option value="4">4 CV</option>
-                  <option value="5" selected="">5 CV</option>
+                  <option value="5" selected>5 CV</option>
                   <option value="6">6 CV</option>
                   <option value="7">7 CV et plus</option>
                 </select>
@@ -845,7 +494,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
           <div><label style="display:block;font-size:9px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em">Km aller-retour</label><input type="number" class="inp" id="dep-km" placeholder="45" oninput="calcKm()"></div>
           <button class="btn btn-primary" onclick="addDep()" style="height:36px">+</button>
         </div>
-        <div id="dep-list"><div style="color:var(--text3);font-size:12px;text-align:center;padding:14px">Aucun déplacement enregistré</div></div>
+        <div id="dep-list"></div>
         <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
           <div style="font-size:11px;color:var(--text3)">Total km enregistrés</div>
           <div style="font-family:'DM Mono',monospace;font-size:14px;font-weight:700;color:var(--blue)" id="dep-total-km">0 km</div>
@@ -872,10 +521,10 @@ tr:hover td{background:rgba(59,130,246,.03)}
             <label style="display:block;font-size:9px;color:var(--text3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em">Type de cible</label>
             <select class="inp" id="pro-type">
               <option value="airbnb">Locations Airbnb / Abritel</option>
-              <option value="hotel">Hôtels &amp; Résidences</option>
+              <option value="hotel">Hôtels & Résidences</option>
               <option value="syndic">Syndics de copropriété</option>
-              <option value="commerce">Commerces &amp; Restaurants</option>
-              <option value="bureau">Bureaux &amp; Entreprises</option>
+              <option value="commerce">Commerces & Restaurants</option>
+              <option value="bureau">Bureaux & Entreprises</option>
               <option value="promoteur">Promoteurs immobiliers</option>
               <option value="all">Tous types</option>
             </select>
@@ -932,10 +581,10 @@ tr:hover td{background:rgba(59,130,246,.03)}
 
 
 <!-- MODAL CLIENT -->
-<div class="modal-overlay" id="client-modal" style="display: none;">
+<div class="modal-overlay" id="client-modal">
   <div class="modal">
     <div class="modal-title" id="cl-modal-title">Nouveau client</div>
-    <input type="hidden" id="cl-idx" value="">
+    <input type="hidden" id="cl-idx">
     <div class="inp-grid">
       <div class="field"><label>Prénom</label><input class="inp" type="text" id="cl-prenom" placeholder="Jean"></div>
       <div class="field"><label>Nom</label><input class="inp" type="text" id="cl-nom" placeholder="Dupont"></div>
@@ -976,7 +625,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
       <div class="field"><label>Date</label><input class="inp" type="date" id="rdv-date"></div>
       <div class="field"><label>Heure</label><input class="inp" type="time" id="rdv-heure" value="09:00"></div>
     </div>
-    <div class="field"><label>Client</label><select class="inp" id="rdv-client"><option value="">Sélectionner...</option><option value="0">MEHDI HADDADI</option><option value="1">NATHALIE </option><option value="2">JEAN PHILLIPE PROFETI</option><option value="3">ANAIS BERARDET</option><option value="4">OTHMAN LAZRAK</option><option value="5">BOUSSO </option><option value="6">DYLAN DEPAUL</option><option value="7">CECILE BOUCHARD</option></select></div>
+    <div class="field"><label>Client</label><select class="inp" id="rdv-client"><option value="">Sélectionner...</option></select></div>
     <div class="inp-grid">
       <div class="field"><label>Type</label>
         <select class="inp" id="rdv-type">
@@ -1009,7 +658,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
     <div class="modal-title">Nouvelle intervention</div>
     <div class="inp-grid">
       <div class="field"><label>Date</label><input class="inp" type="date" id="hi-date"></div>
-      <div class="field"><label>Client</label><select class="inp" id="hi-client"><option value="">Sélectionner...</option><option value="0">MEHDI HADDADI</option><option value="1">NATHALIE </option><option value="2">JEAN PHILLIPE PROFETI</option><option value="3">ANAIS BERARDET</option><option value="4">OTHMAN LAZRAK</option><option value="5">BOUSSO </option><option value="6">DYLAN DEPAUL</option><option value="7">CECILE BOUCHARD</option></select></div>
+      <div class="field"><label>Client</label><select class="inp" id="hi-client"><option value="">Sélectionner...</option></select></div>
     </div>
     <div class="inp-grid">
       <div class="field"><label>Type</label>
@@ -1049,11 +698,11 @@ tr:hover td{background:rgba(59,130,246,.03)}
 </div>
 
 <!-- MODAL FACTURE -->
-<div class="modal-overlay" id="fact-modal" style="display: none;">
+<div class="modal-overlay" id="fact-modal">
   <div class="modal">
     <div class="modal-title">Nouvelle facture</div>
     <div class="inp-grid">
-      <div class="field"><label>Client</label><select class="inp" id="fc-client"><option value="">Sélectionner...</option><option value="0">MEHDI HADDADI</option><option value="1">NATHALIE </option><option value="2">JEAN PHILLIPE PROFETI</option><option value="3">ANAIS BERARDET</option><option value="4">OTHMAN LAZRAK</option><option value="5">BOUSSO </option><option value="6">DYLAN DEPAUL</option><option value="7">CECILE BOUCHARD</option></select></div>
+      <div class="field"><label>Client</label><select class="inp" id="fc-client"><option value="">Sélectionner...</option></select></div>
       <div class="field"><label>Date</label><input class="inp" type="date" id="fc-date"></div>
     </div>
     <div class="inp-grid">
@@ -1062,7 +711,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
     </div>
     <div class="field">
       <label>Total TTC (€)</label>
-      <input class="inp" type="number" id="fc-montant" placeholder="450" style="font-weight:700;color:var(--blue)" readonly="">
+      <input class="inp" type="number" id="fc-montant" placeholder="450" style="font-weight:700;color:var(--blue)" readonly>
     </div>
     <div class="inp-grid">
       <div class="field"><label>Échéance paiement</label><input class="inp" type="date" id="fc-ech"></div>
@@ -1076,7 +725,7 @@ tr:hover td{background:rgba(59,130,246,.03)}
       </div>
     </div>
     <div class="inp-grid">
-      <div class="field"><label>Lié à l'intervention</label><select class="inp" id="fc-intervention"><option value="">— Aucune —</option><option value="0">2026-02-02 · MEHDI HADDADI</option><option value="1">2026-02-04 · NATHALIE </option><option value="2">2026-03-17 · JEAN PHILLIPE PROFETI</option><option value="3">2026-03-12 · ANAIS BERARDET</option><option value="4">2026-03-23 · OTHMAN LAZRAK</option><option value="5">2026-03-23 · BOUSSO </option><option value="6">2026-03-20 · DYLAN DEPAUL</option></select></div>
+      <div class="field"><label>Lié à l'intervention</label><select class="inp" id="fc-intervention"><option value="">— Aucune —</option></select></div>
     </div>
     <div class="field"><label>Description</label><textarea class="inp" id="fc-desc" rows="2" style="resize:none" placeholder="Pose climatiseur, maintenance annuelle..."></textarea></div>
     <div class="modal-actions">
@@ -1124,6 +773,20 @@ tr:hover td{background:rgba(59,130,246,.03)}
     </div>
   </div>
 </div>
+
+<!-- NAVIGATION MOBILE -->
+<nav class="mobile-nav" id="mobile-nav">
+  <div class="mobile-nav-item active" onclick="goPageMobile('dashboard')"><span class="mni">◈</span>Dashboard</div>
+  <div class="mobile-nav-item" onclick="goPageMobile('crm')"><span class="mni">◎</span>Clients</div>
+  <div class="mobile-nav-item" onclick="goPageMobile('calendrier')"><span class="mni">◷</span>Agenda</div>
+  <div class="mobile-nav-item" onclick="goPageMobile('devis')"><span class="mni">◻</span>Devis</div>
+  <div class="mobile-nav-item" onclick="goPageMobile('facturation')"><span class="mni">◈</span>Factures</div>
+  <div class="mobile-nav-item" onclick="goPageMobile('historique')"><span class="mni">→</span>Historique</div>
+  <div class="mobile-nav-item" onclick="goPageMobile('stats')"><span class="mni">↗</span>Stats</div>
+  <div class="mobile-nav-item" onclick="goPageMobile('km')"><span class="mni">⬡</span>KM</div>
+  <div class="mobile-nav-item" onclick="goPageMobile('prospection')"><span class="mni">🎯</span>Prospect</div>
+  <div class="mobile-nav-item" onclick="ouvrirParamsCle()"><span class="mni">🔑</span>Clé API</div>
+</nav>
 
 <!-- MODAL CLÉ API -->
 <div class="modal-overlay" id="apikey-modal">
@@ -1209,7 +872,16 @@ function goPage(pid,el){
   if(fns[pid])fns[pid]();
 }
 
-// ══ SELECTS ══
+function goPageMobile(pid){
+  // Mettre à jour nav mobile
+  document.querySelectorAll('.mobile-nav-item').forEach(b=>b.classList.remove('active'));
+  const activeBtn = document.querySelector(`.mobile-nav-item[onclick="goPageMobile('${pid}')"]`);
+  if(activeBtn) activeBtn.classList.add('active');
+  // Réutiliser goPage avec un élément factice
+  const fakeEl = document.querySelector(`.nav-item[onclick="goPage('${pid}',this)"]`);
+  goPage(pid, fakeEl||document.createElement('div'));
+}
+
 function updateSelects(){
   ['rdv-client','hi-client','fc-client'].forEach(id=>{
     const s=document.getElementById(id);if(!s)return;
@@ -1638,17 +1310,7 @@ function previewDoc(){
 }
 function printDoc(){
   const w=window.open('','_blank');
-  w.document.write('<html><head><title>'+curDoc.title+'</title><style>body{font-family:Georgia,serif;padding:44px;color:#111;font-size:13px;line-height:1.9}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:8px 11px}th{background:#f0f0f0}</style></head><body>'+document.getElementById('prev-content').innerHTML+'<script>
-(function(){
-  const d={"clients":[{"prenom":"MEHDI","nom":"HADDADI","tel":"0622027627","email":"","adresse":"","ville":"LAGNE","type":"pro","equip":"ATLANTIC","notes":""},{"prenom":"NATHALIE","nom":"","tel":"0617910148","email":"","adresse":"","ville":"L ISLE SUR LA SORGUE","type":"particulier","equip":"GREE","notes":""},{"prenom":"JEAN PHILLIPE","nom":"PROFETI","tel":"0629247631","email":"","adresse":"","ville":"VILLENEUVE LES AVIGNON","type":"particulier","equip":"GREE","notes":""},{"prenom":"ANAIS","nom":"BERARDET","tel":"0618136004","email":"","adresse":"","ville":"L ISLE SUR LA SORGUE","type":"particulier","equip":"GREE","notes":""},{"prenom":"OTHMAN","nom":"LAZRAK","tel":"0776749860","email":"","adresse":"","ville":"VELORGUE","type":"particulier","equip":"DAIKIN","notes":""},{"prenom":"BOUSSO","nom":"","tel":"","email":"","adresse":"","ville":"L ISLE SUR LA SORGUE","type":"particulier","equip":"PANASONIC","notes":""},{"prenom":"DYLAN","nom":"DEPAUL","tel":"0658537280","email":"","adresse":"","ville":"VEDENE","type":"particulier","equip":"FUDJITSU","notes":""},{"prenom":"CECILE","nom":"BOUCHARD","tel":"0626252923","email":"","adresse":"","ville":"MAUBEC","type":"particulier","equip":"PANASONIC","notes":""}],"rdvs":[],"interventions":[{"date":"2026-02-02","client":"0","type":"autre","km":"","desc":"POSE, ENTRETIEN","prix":"2827.60","pm":"cheque","statut":"realise","fromFacture":"YSC-0001"},{"date":"2026-02-04","client":"1","type":"autre","km":"","desc":"ENTRETIENS","prix":"80.00","pm":"especes","statut":"realise","fromFacture":"YSC-0002"},{"date":"2026-03-17","client":"2","type":"autre","km":"","desc":"ENTRETIENS","prix":"80.00","pm":"especes","statut":"realise","fromFacture":"YSC-0003"},{"date":"2026-03-12","client":"3","type":"autre","km":"","desc":"ENTRETIENS","prix":"80.00","pm":"especes","statut":"realise","fromFacture":"YSC-0004"},{"date":"2026-03-23","client":"4","type":"autre","km":"","desc":"POSE CLIMATISATION","prix":"650.00","pm":"especes","statut":"realise","fromFacture":"YSC-0005"},{"date":"2026-03-23","client":"5","type":"autre","km":"","desc":"ENTRETIENS, RECHARGE DE GAZ","prix":"200.00","pm":"especes","statut":"realise","fromFacture":"YSC-0006"},{"date":"2026-03-20","client":"6","type":"autre","km":"","desc":"ENTRETIENS","prix":"240.00","pm":"virement","statut":"realise","fromFacture":"YSC-0007"},{"date":"2026-03-23","client":"7","type":"autre","km":"","desc":"ENTRETIENS","prix":"100.00","pm":"cheque","statut":"realise","fromFacture":"YSC-0008"}],"factures":[{"num":"YSC-0001","client":"0","date":"2026-02-02","ech":"","ttc":"2827.6","materiel":"1627.6","mo":"1200","pm":"cheque","desc":"POSE, ENTRETIEN","statut":"payee"},{"num":"YSC-0002","client":"1","date":"2026-02-04","ech":"","ttc":"80","materiel":"0","mo":"80","pm":"especes","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0003","client":"2","date":"2026-03-17","ech":"","ttc":"80","materiel":"0","mo":"80","pm":"especes","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0004","client":"3","date":"2026-03-12","ech":"","ttc":"80","materiel":"0","mo":"80","pm":"especes","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0005","client":"4","date":"2026-03-23","ech":"","ttc":"650","materiel":"550","mo":"100","pm":"especes","desc":"POSE CLIMATISATION","statut":"payee"},{"num":"YSC-0006","client":"5","date":"2026-03-23","ech":"","ttc":"200","materiel":"0","mo":"200","pm":"especes","desc":"ENTRETIENS, RECHARGE DE GAZ","statut":"payee"},{"num":"YSC-0007","client":"6","date":"2026-03-20","ech":"","ttc":"240","materiel":"0","mo":"240","pm":"virement","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0008","client":"7","date":"2026-03-23","ech":"","ttc":"100","materiel":"0","mo":"100","pm":"cheque","desc":"ENTRETIENS","statut":"payee"}],"docs":[],"deplacements":[]};
-  localStorage.setItem('ys_clients', JSON.stringify(d.clients||[]));
-  localStorage.setItem('ys_rdvs', JSON.stringify(d.rdvs||[]));
-  localStorage.setItem('ys_interventions', JSON.stringify(d.interventions||[]));
-  localStorage.setItem('ys_factures', JSON.stringify(d.factures||[]));
-  localStorage.setItem('ys_docs', JSON.stringify(d.docs||[]));
-  localStorage.setItem('ys_deplacements', JSON.stringify(d.deplacements||[]));
-})();
-</script></body></html>');
+  w.document.write('<html><head><title>'+curDoc.title+'</title><style>body{font-family:Georgia,serif;padding:44px;color:#111;font-size:13px;line-height:1.9}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:8px 11px}th{background:#f0f0f0}</style></head><body>'+document.getElementById('prev-content').innerHTML+'</body></html>');
   w.document.close();w.print();
 }
 function insDoc(t){
@@ -2072,6 +1734,5 @@ function importData(e){
 }
 
 </script>
-
-
-</body></html>
+</body>
+</html>
