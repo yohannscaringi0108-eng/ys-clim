@@ -14,7 +14,7 @@
 <!-- FIREBASE -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-  import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAR6hMjHhehvNXpdv8gdAEXeEwm9mArmsU",
@@ -28,38 +28,75 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   window._db = db;
-  window._fbReady = true;
 
-  // Sauvegarde une collection dans Firestore
+  // Sauvegarde vers Firebase
   window.fbSave = async function(k, data) {
     try {
-      await setDoc(doc(db, 'ysclim', k), { data: JSON.stringify(data) });
+      const ts = Date.now();
+      await setDoc(doc(db, 'ysclim', k), { data: JSON.stringify(data), ts });
     } catch(e) { console.warn('Firebase save error:', e); }
   };
 
-  // Charge toutes les données depuis Firestore
-  window.fbLoad = async function() {
+  // Envoyer TOUTES les données locales vers Firebase
+  window.fbPush = async function() {
     const keys = ['clients','rdvs','interventions','factures','docs','deplacements'];
     for(const k of keys) {
-      try {
-        const snap = await getDoc(doc(db, 'ysclim', k));
-        if(snap.exists()) {
-          const parsed = JSON.parse(snap.data().data || '[]');
-          localStorage.setItem('ys_'+k, JSON.stringify(parsed));
-          window[k] = parsed;
-        }
-      } catch(e) { console.warn('Firebase load error:', k, e); }
+      const local = localStorage.getItem('ys_'+k);
+      if(local) await window.fbSave(k, JSON.parse(local));
     }
-    // Rafraîchir l'interface
-    if(window.renderDash) { renderDash(); renderCRM(); }
-    console.log('✅ Données chargées depuis Firebase');
     const ind = document.getElementById('fb-ind');
     if(ind) { ind.textContent = '☁️ Synchronisé'; ind.style.color = 'var(--ok)'; }
   };
 
-  // Charger au démarrage
+  // Charger depuis Firebase SEULEMENT si plus récent que local
+  window.fbLoad = async function() {
+    const keys = ['clients','rdvs','interventions','factures','docs','deplacements'];
+    let updated = false;
+    for(const k of keys) {
+      try {
+        const snap = await getDoc(doc(db, 'ysclim', k));
+        if(snap.exists()) {
+          const fbTs = snap.data().ts || 0;
+          const localTs = parseInt(localStorage.getItem('ys_ts_'+k)||'0');
+          // Charger depuis Firebase seulement si Firebase est plus récent
+          if(fbTs > localTs) {
+            const parsed = JSON.parse(snap.data().data || '[]');
+            localStorage.setItem('ys_'+k, JSON.stringify(parsed));
+            localStorage.setItem('ys_ts_'+k, fbTs);
+            window[k] = parsed;
+            updated = true;
+          }
+        }
+      } catch(e) { console.warn('Firebase load error:', k, e); }
+    }
+    if(updated && window.renderDash) {
+      renderDash(); renderCRM();
+      if(window.renderHist) renderHist();
+      if(window.renderFact) renderFact();
+    }
+    const ind = document.getElementById('fb-ind');
+    if(ind) { ind.textContent = '☁️ Synchronisé'; ind.style.color = 'var(--ok)'; }
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => window.fbLoad(), 500);
+    setTimeout(async () => {
+      const ind = document.getElementById('fb-ind');
+      if(ind) { ind.textContent = '☁️ Connexion...'; }
+      // Vérifier si Firebase a des données
+      try {
+        const snap = await getDoc(doc(db, 'ysclim', 'clients'));
+        if(!snap.exists()) {
+          // Firebase vide → envoyer les données locales
+          await window.fbPush();
+          console.log('✅ Données initiales envoyées sur Firebase');
+        } else {
+          // Firebase a des données → charger si plus récent
+          await window.fbLoad();
+        }
+      } catch(e) {
+        if(ind) { ind.textContent = '☁️ Hors ligne'; ind.style.color = 'var(--text3)'; }
+      }
+    }, 800);
   });
 </script>
 <style>
@@ -260,7 +297,6 @@ tr:hover td{background:rgba(59,130,246,.03)}
   .mobile-nav{display:none}
 }
 </style>
-<script>(function(){var d={"clients":[{"prenom":"MEHDI","nom":"HADDADI","tel":"0622027627","email":"","adresse":"","ville":"LAGNE","type":"pro","equip":"ATLANTIC","notes":""},{"prenom":"NATHALIE","nom":"","tel":"0617910148","email":"","adresse":"","ville":"L ISLE SUR LA SORGUE","type":"particulier","equip":"GREE","notes":""},{"prenom":"JEAN PHILLIPE","nom":"PROFETI","tel":"0629247631","email":"","adresse":"","ville":"VILLENEUVE LES AVIGNON","type":"particulier","equip":"GREE","notes":""},{"prenom":"ANAIS","nom":"BERARDET","tel":"0618136004","email":"","adresse":"","ville":"L ISLE SUR LA SORGUE","type":"particulier","equip":"GREE","notes":""},{"prenom":"OTHMAN","nom":"LAZRAK","tel":"0776749860","email":"","adresse":"","ville":"VELORGUE","type":"particulier","equip":"DAIKIN","notes":""},{"prenom":"BOUSSO","nom":"","tel":"","email":"","adresse":"","ville":"L ISLE SUR LA SORGUE","type":"particulier","equip":"PANASONIC","notes":""},{"prenom":"DYLAN","nom":"DEPAUL","tel":"0658537280","email":"","adresse":"","ville":"VEDENE","type":"particulier","equip":"FUDJITSU","notes":""},{"prenom":"CECILE","nom":"BOUCHARD","tel":"0626252923","email":"","adresse":"","ville":"MAUBEC","type":"particulier","equip":"PANASONIC","notes":""}],"rdvs":[],"interventions":[{"date":"2026-02-02","client":"0","type":"autre","km":"","desc":"POSE, ENTRETIEN","prix":"2827.60","pm":"cheque","statut":"realise","fromFacture":"YSC-0001"},{"date":"2026-02-04","client":"1","type":"autre","km":"","desc":"ENTRETIENS","prix":"80.00","pm":"especes","statut":"realise","fromFacture":"YSC-0002"},{"date":"2026-03-17","client":"2","type":"autre","km":"","desc":"ENTRETIENS","prix":"80.00","pm":"especes","statut":"realise","fromFacture":"YSC-0003"},{"date":"2026-03-12","client":"3","type":"autre","km":"","desc":"ENTRETIENS","prix":"80.00","pm":"especes","statut":"realise","fromFacture":"YSC-0004"},{"date":"2026-03-23","client":"4","type":"autre","km":"","desc":"POSE CLIMATISATION","prix":"650.00","pm":"especes","statut":"realise","fromFacture":"YSC-0005"},{"date":"2026-03-23","client":"5","type":"autre","km":"","desc":"ENTRETIENS, RECHARGE DE GAZ","prix":"200.00","pm":"especes","statut":"realise","fromFacture":"YSC-0006"},{"date":"2026-03-20","client":"6","type":"autre","km":"","desc":"ENTRETIENS","prix":"240.00","pm":"virement","statut":"realise","fromFacture":"YSC-0007"},{"date":"2026-03-23","client":"7","type":"autre","km":"","desc":"ENTRETIENS","prix":"100.00","pm":"cheque","statut":"realise","fromFacture":"YSC-0008"}],"factures":[{"num":"YSC-0001","client":"0","date":"2026-02-02","ech":"","ttc":"2827.6","materiel":"1627.6","mo":"1200","pm":"cheque","desc":"POSE, ENTRETIEN","statut":"payee"},{"num":"YSC-0002","client":"1","date":"2026-02-04","ech":"","ttc":"80","materiel":"0","mo":"80","pm":"especes","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0003","client":"2","date":"2026-03-17","ech":"","ttc":"80","materiel":"0","mo":"80","pm":"especes","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0004","client":"3","date":"2026-03-12","ech":"","ttc":"80","materiel":"0","mo":"80","pm":"especes","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0005","client":"4","date":"2026-03-23","ech":"","ttc":"650","materiel":"550","mo":"100","pm":"especes","desc":"POSE CLIMATISATION","statut":"payee"},{"num":"YSC-0006","client":"5","date":"2026-03-23","ech":"","ttc":"200","materiel":"0","mo":"200","pm":"especes","desc":"ENTRETIENS, RECHARGE DE GAZ","statut":"payee"},{"num":"YSC-0007","client":"6","date":"2026-03-20","ech":"","ttc":"240","materiel":"0","mo":"240","pm":"virement","desc":"ENTRETIENS","statut":"payee"},{"num":"YSC-0008","client":"7","date":"2026-03-23","ech":"","ttc":"100","materiel":"0","mo":"100","pm":"cheque","desc":"ENTRETIENS","statut":"payee"}],"docs":[],"deplacements":[]};localStorage.setItem('ys_clients',JSON.stringify(d.clients||[]));localStorage.setItem('ys_rdvs',JSON.stringify(d.rdvs||[]));localStorage.setItem('ys_interventions',JSON.stringify(d.interventions||[]));localStorage.setItem('ys_factures',JSON.stringify(d.factures||[]));localStorage.setItem('ys_docs',JSON.stringify(d.docs||[]));localStorage.setItem('ys_deplacements',JSON.stringify(d.deplacements||[]));})();</script>
 </head>
 <body>
 
@@ -896,7 +932,8 @@ function load(){
   });
 }
 function sv(k,d){
-  try{localStorage.setItem('ys_'+k,JSON.stringify(d))}catch(e){}
+  const ts=Date.now();
+  try{localStorage.setItem('ys_'+k,JSON.stringify(d));localStorage.setItem('ys_ts_'+k,ts);}catch(e){}
   if(window.fbSave) window.fbSave(k,d);
   const ind=document.getElementById('fb-ind');
   if(ind){ind.textContent='☁️ Sauvegarde...';ind.style.color='var(--warn)';}
