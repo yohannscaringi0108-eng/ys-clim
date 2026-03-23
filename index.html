@@ -217,8 +217,9 @@ tr:hover td{background:rgba(59,130,246,.03)}
 
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
-      <div class="metrics">
+      <div class="metrics" style="grid-template-columns:repeat(5,1fr)">
         <div class="metric metric-blue"><div class="metric-label">CA total</div><div class="metric-value" id="kpi-ca">0 €</div><div class="metric-sub">interventions + factures</div></div>
+        <div class="metric"><div class="metric-label">Réel gagné (hors matériel)</div><div class="metric-value" id="kpi-mo" style="color:var(--ok)">0 €</div></div>
         <div class="metric"><div class="metric-label">Interventions ce mois</div><div class="metric-value" id="kpi-mois">0</div></div>
         <div class="metric"><div class="metric-label">Clients</div><div class="metric-value" id="kpi-cl">0</div></div>
         <div class="metric"><div class="metric-label">Factures en attente</div><div class="metric-value" id="kpi-att" style="color:var(--warn)">0 €</div></div>
@@ -307,9 +308,10 @@ tr:hover td{background:rgba(59,130,246,.03)}
 
     <!-- FACTURATION -->
     <div class="page" id="page-facturation">
-      <div class="metrics" style="grid-template-columns:repeat(3,1fr)">
+      <div class="metrics" style="grid-template-columns:repeat(4,1fr)">
         <div class="metric"><div class="metric-label">Total facturé</div><div class="metric-value" id="ft-total">0 €</div></div>
-        <div class="metric metric-blue"><div class="metric-label">Encaissé</div><div class="metric-value" id="ft-enc">0 €</div></div>
+        <div class="metric metric-blue"><div class="metric-label">Total encaissé</div><div class="metric-value" id="ft-enc">0 €</div></div>
+        <div class="metric"><div class="metric-label">Réel gagné (hors matériel)</div><div class="metric-value" id="ft-mo" style="color:var(--ok)">0 €</div></div>
         <div class="metric"><div class="metric-label">En attente</div><div class="metric-value" id="ft-att" style="color:var(--warn)">0 €</div></div>
       </div>
       <div class="filters">
@@ -327,9 +329,10 @@ tr:hover td{background:rgba(59,130,246,.03)}
 
     <!-- HISTORIQUE -->
     <div class="page" id="page-historique">
-      <div class="metrics">
+      <div class="metrics" style="grid-template-columns:repeat(5,1fr)">
         <div class="metric metric-blue"><div class="metric-label">Interventions totales</div><div class="metric-value" id="hi-nb">0</div></div>
-        <div class="metric"><div class="metric-label">CA interventions</div><div class="metric-value" id="hi-ca">0 €</div></div>
+        <div class="metric"><div class="metric-label">CA total</div><div class="metric-value" id="hi-ca">0 €</div></div>
+        <div class="metric"><div class="metric-label">Réel gagné (hors matériel)</div><div class="metric-value" id="hi-mo" style="color:var(--ok)">0 €</div></div>
         <div class="metric"><div class="metric-label">Km parcourus</div><div class="metric-value" id="hi-km">0</div></div>
         <div class="metric"><div class="metric-label">Panier moyen</div><div class="metric-value" id="hi-moy">0 €</div></div>
       </div>
@@ -349,9 +352,10 @@ tr:hover td{background:rgba(59,130,246,.03)}
 
     <!-- STATS -->
     <div class="page" id="page-stats">
-      <div class="metrics">
+      <div class="metrics" style="grid-template-columns:repeat(5,1fr)">
         <div class="metric metric-blue"><div class="metric-label">CA global</div><div class="metric-value" id="st-ca">0 €</div></div>
         <div class="metric"><div class="metric-label">CA ce mois</div><div class="metric-value" id="st-mois">0 €</div></div>
+        <div class="metric"><div class="metric-label">Réel gagné (hors matériel)</div><div class="metric-value" id="st-mo" style="color:var(--ok)">0 €</div></div>
         <div class="metric"><div class="metric-label">Interventions</div><div class="metric-value" id="st-nb">0</div></div>
         <div class="metric"><div class="metric-label">Km totaux</div><div class="metric-value" id="st-km">0</div></div>
       </div>
@@ -663,18 +667,25 @@ tr:hover td{background:rgba(59,130,246,.03)}
       <div class="field"><label>Date</label><input class="inp" type="date" id="fc-date"></div>
     </div>
     <div class="inp-grid">
-      <div class="field"><label>Montant HT (€)</label><input class="inp" type="number" id="fc-montant" placeholder="450"></div>
-      <div class="field"><label>TVA (%)</label>
-        <select class="inp" id="fc-tva">
-          <option value="20">20%</option>
-          <option value="10">10%</option>
-          <option value="5.5">5.5%</option>
-          <option value="0">0% (exonéré)</option>
+      <div class="field"><label>Prix matériel TTC (€)</label><input class="inp" type="number" id="fc-materiel" placeholder="300" oninput="calcTotalFact()"></div>
+      <div class="field"><label>Main d'œuvre TTC (€)</label><input class="inp" type="number" id="fc-mo" placeholder="150" oninput="calcTotalFact()"></div>
+    </div>
+    <div class="field">
+      <label>Total TTC (€)</label>
+      <input class="inp" type="number" id="fc-montant" placeholder="450" style="font-weight:700;color:var(--blue)" readonly>
+    </div>
+    <div class="inp-grid">
+      <div class="field"><label>Échéance paiement</label><input class="inp" type="date" id="fc-ech"></div>
+      <div class="field"><label>Mode de paiement</label>
+        <select class="inp" id="fc-pm">
+          <option value="virement">Virement</option>
+          <option value="cheque">Chèque</option>
+          <option value="especes">Espèces</option>
+          <option value="cb">CB</option>
         </select>
       </div>
     </div>
     <div class="inp-grid">
-      <div class="field"><label>Échéance paiement</label><input class="inp" type="date" id="fc-ech"></div>
       <div class="field"><label>Lié à l'intervention</label><select class="inp" id="fc-intervention"><option value="">— Aucune —</option></select></div>
     </div>
     <div class="field"><label>Description</label><textarea class="inp" id="fc-desc" rows="2" style="resize:none" placeholder="Pose climatiseur, maintenance annuelle..."></textarea></div>
@@ -949,9 +960,11 @@ function renderHist(){
     return m&&(histF==='all'||x.type===histF);
   }).sort((a,b)=>new Date(b.date)-new Date(a.date));
   const total=interventions.reduce((s,x)=>s+(parseFloat(x.prix)||0),0);
+  const mo=factures.filter(f=>f.statut==='payee').reduce((s,f)=>s+(parseFloat(f.mo)||0),0);
   const km=interventions.reduce((s,x)=>s+(parseFloat(x.km)||0),0);
   document.getElementById('hi-nb').textContent=interventions.length;
   document.getElementById('hi-ca').textContent=total.toFixed(0)+' €';
+  document.getElementById('hi-mo').textContent=mo.toFixed(0)+' €';
   document.getElementById('hi-km').textContent=km.toFixed(0);
   document.getElementById('hi-moy').textContent=interventions.length?(total/interventions.length).toFixed(0)+' €':'0 €';
   const typeColor={installation:'badge-blue',maintenance:'badge-ok',depannage:'badge-warn',autre:'badge-neutral'};
@@ -992,14 +1005,16 @@ function renderFact(){
     const m=!s||((cl?cl.prenom+' '+cl.nom:'')+f.num).toLowerCase().includes(s);
     return m&&(factF==='all'||f.statut===factF);
   });
-  const total=factures.reduce((s,f)=>s+(parseFloat(f.ht)||0)*(1+(parseFloat(f.tva)||20)/100),0);
-  const enc=factures.filter(f=>f.statut==='payee').reduce((s,f)=>s+(parseFloat(f.ht)||0)*(1+(parseFloat(f.tva)||20)/100),0);
+  const total=factures.reduce((s,f)=>s+(parseFloat(f.ttc)||parseFloat(f.ht)||0),0);
+  const enc=factures.filter(f=>f.statut==='payee').reduce((s,f)=>s+(parseFloat(f.ttc)||parseFloat(f.ht)||0),0);
+  const mo=factures.filter(f=>f.statut==='payee').reduce((s,f)=>s+(parseFloat(f.mo)||0),0);
   document.getElementById('ft-total').textContent=total.toFixed(0)+' €';
   document.getElementById('ft-enc').textContent=enc.toFixed(0)+' €';
+  document.getElementById('ft-mo').textContent=mo.toFixed(0)+' €';
   document.getElementById('ft-att').textContent=(total-enc).toFixed(0)+' €';
   document.getElementById('fact-tbody').innerHTML=list.length?list.map(f=>{
     const ri=factures.indexOf(f);const cl=clients[f.client];
-    const ttc=((parseFloat(f.ht)||0)*(1+(parseFloat(f.tva)||20)/100)).toFixed(0);
+    const ttc=(parseFloat(f.ttc)||parseFloat(f.ht)||0).toFixed(0);
     return`<tr>
       <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)">${f.num}</td>
       <td style="font-weight:600;color:var(--white)">${cl?cl.prenom+' '+cl.nom:'—'}</td>
@@ -1013,23 +1028,29 @@ function renderFact(){
       </td></tr>`;
   }).join(''):'<tr><td colspan="7" style="text-align:center;padding:28px;color:var(--text3)">Aucune facture</td></tr>';
 }
+function calcTotalFact(){
+  const mat=parseFloat(document.getElementById('fc-materiel').value)||0;
+  const mo=parseFloat(document.getElementById('fc-mo').value)||0;
+  document.getElementById('fc-montant').value=(mat+mo)||'';
+}
 function openFactModal(){
   document.getElementById('fc-date').value=new Date().toISOString().split('T')[0];
-  ['fc-montant','fc-ech','fc-desc'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('fc-tva').value='20';
+  ['fc-montant','fc-ech','fc-desc','fc-materiel','fc-mo'].forEach(id=>document.getElementById(id).value='');
   updateSelects();openModal('fact-modal');
 }
 function saveFact(){
-  const f={num:'YSC-'+String(factures.length+1).padStart(4,'0'),client:document.getElementById('fc-client').value,date:document.getElementById('fc-date').value,ech:document.getElementById('fc-ech').value,ht:document.getElementById('fc-montant').value,tva:document.getElementById('fc-tva').value,desc:document.getElementById('fc-desc').value.trim(),statut:'attente'};
-  if(!f.ht)return;
+  const mat=document.getElementById('fc-materiel').value;
+  const mo=document.getElementById('fc-mo').value;
+  const ttc=document.getElementById('fc-montant').value;
+  const f={num:'YSC-'+String(factures.length+1).padStart(4,'0'),client:document.getElementById('fc-client').value,date:document.getElementById('fc-date').value,ech:document.getElementById('fc-ech').value,ttc:ttc,materiel:mat,mo:mo,pm:document.getElementById('fc-pm').value,desc:document.getElementById('fc-desc').value.trim(),statut:'attente'};
+  if(!f.ttc)return;
   factures.push(f);sv('factures',factures);closeModal('fact-modal');renderFact();showSave();
 }
 function payFact(i){
   const f=factures[i];
   factures[i].statut='payee';
   sv('factures',factures);
-  // Créer l'intervention correspondante automatiquement
-  const ttc=((parseFloat(f.ht)||0)*(1+(parseFloat(f.tva)||20)/100));
+  const ttc=parseFloat(f.ttc)||parseFloat(f.ht)||0;
   const interv={
     date: f.date||new Date().toISOString().split('T')[0],
     client: f.client,
@@ -1037,7 +1058,7 @@ function payFact(i){
     km: '',
     desc: f.desc||(f.num+' — facture validée'),
     prix: ttc.toFixed(2),
-    pm: 'virement',
+    pm: f.pm||'virement',
     statut: 'realise',
     fromFacture: f.num
   };
@@ -1053,9 +1074,11 @@ function renderStats(){
   const ca=interventions.reduce((s,x)=>s+(parseFloat(x.prix)||0),0);
   const now=new Date();const ym=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
   const mois=interventions.filter(x=>x.date&&x.date.startsWith(ym)).reduce((s,x)=>s+(parseFloat(x.prix)||0),0);
+  const mo=factures.filter(f=>f.statut==='payee').reduce((s,f)=>s+(parseFloat(f.mo)||0),0);
   const km=interventions.reduce((s,x)=>s+(parseFloat(x.km)||0),0);
   document.getElementById('st-ca').textContent=ca.toFixed(0)+' €';
   document.getElementById('st-mois').textContent=mois.toFixed(0)+' €';
+  document.getElementById('st-mo').textContent=mo.toFixed(0)+' €';
   document.getElementById('st-nb').textContent=interventions.length;
   document.getElementById('st-km').textContent=km.toFixed(0);
   const months=[];for(let i=11;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth()-i,1);months.push({key:`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`,label:d.toLocaleDateString('fr-FR',{month:'short'})})}
@@ -1261,12 +1284,14 @@ function applySig(){
 // ══ DASHBOARD ══
 function renderDash(){
   const ca=interventions.reduce((s,x)=>s+(parseFloat(x.prix)||0),0);
+  const mo=factures.filter(f=>f.statut==='payee').reduce((s,f)=>s+(parseFloat(f.mo)||0),0);
   const now=new Date();const ym=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}`;
   const mois=interventions.filter(x=>x.date&&x.date.startsWith(ym)).length;
   const pending=factures.filter(f=>f.statut==='attente');
-  const pendingCA=pending.reduce((s,f)=>s+(parseFloat(f.ht)||0)*(1+(parseFloat(f.tva)||20)/100),0);
+  const pendingCA=pending.reduce((s,f)=>s+(parseFloat(f.ttc)||parseFloat(f.ht)||0),0);
   const upcoming=rdvs.filter(r=>new Date(r.date+'T'+r.heure)>=now).sort((a,b)=>new Date(a.date+'T'+a.heure)-new Date(b.date+'T'+b.heure));
   document.getElementById('kpi-ca').textContent=ca.toFixed(0)+' €';
+  document.getElementById('kpi-mo').textContent=mo.toFixed(0)+' €';
   document.getElementById('kpi-mois').textContent=mois;
   document.getElementById('kpi-cl').textContent=clients.length;
   document.getElementById('kpi-att').textContent=pendingCA.toFixed(0)+' €';
