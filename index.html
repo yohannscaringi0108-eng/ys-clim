@@ -11,6 +11,57 @@
 <meta name="theme-color" content="#070809"/>
 <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070809'/><circle cx='50' cy='50' r='8' fill='%233b82f6' filter='drop-shadow(0 0 8px %233b82f6)'/><text x='50' y='85' text-anchor='middle' font-family='Inter,sans-serif' font-size='18' font-weight='700' fill='white'>YS</text></svg>"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAR6hMjHhehvNXpdv8gdAEXeEwm9mArmsU",
+    authDomain: "climelio.firebaseapp.com",
+    projectId: "climelio",
+    storageBucket: "climelio.firebasestorage.app",
+    messagingSenderId: "488859996643",
+    appId: "1:488859996643:web:1642907445c60d4732d0d6"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  window._db = db;
+  window._fbReady = true;
+
+  // Sauvegarde une collection dans Firestore
+  window.fbSave = async function(k, data) {
+    try {
+      await setDoc(doc(db, 'ysclim', k), { data: JSON.stringify(data) });
+    } catch(e) { console.warn('Firebase save error:', e); }
+  };
+
+  // Charge toutes les données depuis Firestore
+  window.fbLoad = async function() {
+    const keys = ['clients','rdvs','interventions','factures','docs','deplacements'];
+    for(const k of keys) {
+      try {
+        const snap = await getDoc(doc(db, 'ysclim', k));
+        if(snap.exists()) {
+          const parsed = JSON.parse(snap.data().data || '[]');
+          localStorage.setItem('ys_'+k, JSON.stringify(parsed));
+          window[k] = parsed;
+        }
+      } catch(e) { console.warn('Firebase load error:', k, e); }
+    }
+    // Rafraîchir l'interface
+    if(window.renderDash) { renderDash(); renderCRM(); }
+    console.log('✅ Données chargées depuis Firebase');
+    const ind = document.getElementById('fb-ind');
+    if(ind) { ind.textContent = '☁️ Synchronisé'; ind.style.color = 'var(--ok)'; }
+  };
+
+  // Charger au démarrage
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => window.fbLoad(), 500);
+  });
+</script>
 <style>
 :root{
   --bg:#070809;
@@ -247,7 +298,8 @@ tr:hover td{background:rgba(59,130,246,.03)}
       <div class="tb-title" id="tb-title">Dashboard</div>
       <div class="tb-sub" id="tb-sub">Vue d'ensemble · YS Clim</div>
     </div>
-    <div style="display:flex;gap:8px" id="tb-right">
+    <div style="display:flex;gap:8px;align-items:center" id="tb-right">
+  <span id="fb-ind" style="font-size:10px;color:var(--text3);font-family:'DM Mono',monospace">☁️ Connexion...</span>
   <button class="btn btn-primary" onclick="saveHTML()" title="Télécharge le fichier HTML avec toutes vos données intégrées">⬇ Sauvegarder</button>
 </div>
   </div>
@@ -843,7 +895,14 @@ function load(){
     try{eval(k+'=JSON.parse(localStorage.getItem("ys_'+k+'")||"[]")');}catch(e){}
   });
 }
-function sv(k,d){try{localStorage.setItem('ys_'+k,JSON.stringify(d))}catch(e){}}
+function sv(k,d){
+  try{localStorage.setItem('ys_'+k,JSON.stringify(d))}catch(e){}
+  if(window.fbSave) window.fbSave(k,d);
+  const ind=document.getElementById('fb-ind');
+  if(ind){ind.textContent='☁️ Sauvegarde...';ind.style.color='var(--warn)';}
+  clearTimeout(window._fbTimer);
+  window._fbTimer=setTimeout(()=>{if(ind){ind.textContent='☁️ Synchronisé';ind.style.color='var(--ok)';}},1500);
+}
 function showSave(){const e=document.getElementById('save-ind');e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1800)}
 function openModal(id){document.getElementById(id).style.display='flex'}
 function closeModal(id){document.getElementById(id).style.display='none'}
