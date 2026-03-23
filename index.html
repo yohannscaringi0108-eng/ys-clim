@@ -1346,7 +1346,7 @@ Réponds UNIQUEMENT avec un tableau JSON valide, sans texte avant ni après, san
 
     const res = await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
+      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true','x-api-key':'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'},
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',
         max_tokens:2000,
@@ -1354,6 +1354,8 @@ Réponds UNIQUEMENT avec un tableau JSON valide, sans texte avant ni après, san
       })
     });
     const data = await res.json();
+    console.log('Réponse API:', JSON.stringify(data).substring(0,200));
+    if(data.error) throw new Error('API: '+data.error.message);
     const txt = data.content.map(c=>c.text||'').join('');
     const clean = txt.replace(/```json|```/g,'').trim();
     prospectsData = JSON.parse(clean);
@@ -1414,7 +1416,7 @@ Sois direct et pratique.`;
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
+      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true','x-api-key':'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'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:proConvHistory})
     });
     const data = await res.json();
@@ -1440,7 +1442,7 @@ async function iaQuestion(){
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
+      headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true','x-api-key':'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'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,messages:proConvHistory})
     });
     const data = await res.json();
